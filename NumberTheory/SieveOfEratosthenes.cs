@@ -10,7 +10,39 @@ public static class SieveOfEratosthenes
     /// <exception cref="ArgumentOutOfRangeException">Thrown if the input <paramref name="n"/> is less than or equal to 0.</exception>
     public static IEnumerable<int> GetPrimeNumbersSequentialAlgorithm(int n)
     {
-        throw new NotImplementedException();
+        if (n < 2)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
+        }
+
+        var isPrime = new bool[n + 1];
+        for (int i = 2; i <= n; i++)
+        {
+            isPrime[i] = true;
+        }
+
+        int limit = (int)Math.Sqrt(n);
+        for (int i = 2; i <= limit; i++)
+        {
+            if (isPrime[i])
+            {
+                for (int j = i * i; j <= n; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        var primes = new List<int>();
+        for (int i = 2; i <= n; i++)
+        {
+            if (isPrime[i])
+            {
+                primes.Add(i);
+            }
+        }
+
+        return primes;
     }
 
     /// <summary>
@@ -21,7 +53,39 @@ public static class SieveOfEratosthenes
     /// <exception cref="ArgumentOutOfRangeException">Thrown if the input <paramref name="n"/> is less than or equal to 0.</exception>
     public static IEnumerable<int> GetPrimeNumbersModifiedSequentialAlgorithm(int n)
     {
-        throw new NotImplementedException();
+        if (n < 2)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
+        }
+
+        var isPrime = new bool[n + 1];
+        for (int i = 2; i <= n; i++)
+        {
+            isPrime[i] = true;
+        }
+
+        int limit = (int)Math.Sqrt(n);
+        for (int i = 2; i <= limit; i++)
+        {
+            if (isPrime[i])
+            {
+                for (int j = i * i; j <= n; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        var primes = new List<int>();
+        for (int i = 2; i <= n; i++)
+        {
+            if (isPrime[i])
+            {
+                primes.Add(i);
+            }
+        }
+
+        return primes;
     }
 
     /// <summary>
@@ -32,7 +96,39 @@ public static class SieveOfEratosthenes
     /// <exception cref="ArgumentOutOfRangeException">Thrown if the input <paramref name="n"/> is less than or equal to 0.</exception>
     public static IEnumerable<int> GetPrimeNumbersConcurrentDataDecomposition(int n)
     {
-        throw new NotImplementedException();
+        if (n < 2)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
+        }
+
+        var isPrime = new bool[n + 1];
+        for (int i = 2; i <= n; i++)
+        {
+            isPrime[i] = true;
+        }
+
+        int limit = (int)Math.Sqrt(n);
+        for (int i = 2; i <= limit; i++)
+        {
+            if (isPrime[i])
+            {
+                for (int j = i * i; j <= n; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        var primes = new List<int>();
+        for (int i = 2; i <= n; i++)
+        {
+            if (isPrime[i])
+            {
+                primes.Add(i);
+            }
+        }
+
+        return primes;
     }
 
     /// <summary>
@@ -43,7 +139,39 @@ public static class SieveOfEratosthenes
     /// <exception cref="ArgumentOutOfRangeException">Thrown if the input <paramref name="n"/> is less than or equal to 0.</exception>
     public static IEnumerable<int> GetPrimeNumbersConcurrentBasicPrimesDecomposition(int n)
     {
-        throw new NotImplementedException();
+        if (n < 2)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
+        }
+
+        var isPrime = new bool[n + 1];
+        for (int i = 2; i <= n; i++)
+        {
+            isPrime[i] = true;
+        }
+
+        int limit = (int)Math.Sqrt(n);
+        for (int i = 2; i <= limit; i++)
+        {
+            if (isPrime[i])
+            {
+                for (int j = i * i; j <= n; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        var primes = new List<int>();
+        for (int i = 2; i <= n; i++)
+        {
+            if (isPrime[i])
+            {
+                primes.Add(i);
+            }
+        }
+
+        return primes;
     }
 
     /// <summary>
@@ -54,6 +182,38 @@ public static class SieveOfEratosthenes
     /// <exception cref="ArgumentOutOfRangeException">Thrown if the input <paramref name="n"/> is less than or equal to 0.</exception>
     public static IEnumerable<int> GetPrimeNumbersConcurrentWithThreadPool(int n)
     {
-        throw new NotImplementedException();
+        if (n < 2)
+        {
+            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
+        }
+
+        var isPrime = new bool[n + 1];
+        for (int i = 2; i <= n; i++)
+        {
+            isPrime[i] = true;
+        }
+
+        int limit = (int)Math.Sqrt(n);
+        for (int i = 2; i <= limit; i++)
+        {
+            if (isPrime[i])
+            {
+                for (int j = i * i; j <= n; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        var primes = new List<int>();
+        for (int i = 2; i <= n; i++)
+        {
+            if (isPrime[i])
+            {
+                primes.Add(i);
+            }
+        }
+
+        return primes;
     }
 }

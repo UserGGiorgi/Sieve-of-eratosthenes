@@ -6,7 +6,7 @@ namespace NumberTheory.Tests;
 
 public class SieveOfEratosthenesTests
 {
-    private static int[][] primes =
+    private static readonly int[][] Primes =
     [
         [2, 3, 5, 7, 11], [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
         [
@@ -30,83 +30,83 @@ public class SieveOfEratosthenesTests
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersSequentialAlgorithm),
                 12,
-                primes[0]);
+                Primes[0]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersModifiedSequentialAlgorithm),
                 12,
-                primes[0]);
+                Primes[0]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentDataDecomposition),
                 12,
-                primes[0]);
+                Primes[0]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentWithThreadPool),
                 12,
-                primes[0]);
+                Primes[0]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentBasicPrimesDecomposition),
                 12,
-                primes[0]);
+                Primes[0]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersSequentialAlgorithm),
                 30,
-                primes[1]);
+                Primes[1]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersModifiedSequentialAlgorithm),
                 30,
-                primes[1]);
+                Primes[1]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentDataDecomposition),
                 30,
-                primes[1]);
+                Primes[1]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentWithThreadPool),
                 30,
-                primes[1]);
+                Primes[1]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentBasicPrimesDecomposition),
                 30,
-                primes[1]);
+                Primes[1]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersSequentialAlgorithm),
                 230,
-                primes[2]);
+                Primes[2]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersModifiedSequentialAlgorithm),
                 230,
-                primes[2]);
+                Primes[2]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentDataDecomposition),
                 230,
-                primes[2]);
+                Primes[2]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentWithThreadPool),
                 230,
-                primes[2]);
+                Primes[2]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentBasicPrimesDecomposition),
                 230,
-                primes[2]);
+                Primes[2]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersSequentialAlgorithm),
                 542,
-                primes[3]);
+                Primes[3]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersModifiedSequentialAlgorithm),
                 542,
-                primes[3]);
+                Primes[3]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentDataDecomposition),
                 542,
-                primes[3]);
+                Primes[3]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentWithThreadPool),
                 542,
-                primes[3]);
+                Primes[3]);
             yield return new TestCaseData(
                 new Func<int, IEnumerable<int>>(GetPrimeNumbersConcurrentBasicPrimesDecomposition),
                 542,
-                primes[3]);
+                Primes[3]);
         }
     }
 
