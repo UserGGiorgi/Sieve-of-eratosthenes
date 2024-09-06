@@ -52,7 +52,7 @@ public static class SieveOfEratosthenes
         {
             if (isPrime[i])
             {
-                for (int j = i * i; j > 0 && j <= n; j += i)
+                for (int j = i * i; j <= n; j += i)
                 {
                     isPrime[j] = false;
                 }
@@ -207,7 +207,7 @@ public static class SieveOfEratosthenes
                     isPrime[j] = false;
                 }
 
-                _ = countdownEvent.Signal();
+                var v = countdownEvent.Signal();
             });
         }
 
