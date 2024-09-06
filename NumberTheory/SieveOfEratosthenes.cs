@@ -10,35 +10,18 @@ public static class SieveOfEratosthenes
     /// <exception cref="ArgumentOutOfRangeException">Thrown if the input <paramref name="n"/> is less than or equal to 0.</exception>
     public static IEnumerable<int> GetPrimeNumbersSequentialAlgorithm(int n)
     {
-        if (n < 2)
+        if (n <= 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
-        }
-
-        var isPrime = new bool[n + 1];
-        for (int i = 2; i <= n; i++)
-        {
-            isPrime[i] = true;
-        }
-
-        int limit = (int)Math.Sqrt(n);
-        for (int i = 2; i <= limit; i++)
-        {
-            if (isPrime[i])
-            {
-                for (int j = i * i; j <= n; j += i)
-                {
-                    isPrime[j] = false;
-                }
-            }
+            throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than 0.");
         }
 
         var primes = new List<int>();
-        for (int i = 2; i <= n; i++)
+
+        for (int number = 2; number <= n; number++)
         {
-            if (isPrime[i])
+            if (IsPrime(number))
             {
-                primes.Add(i);
+                primes.Add(number);
             }
         }
 
@@ -69,7 +52,7 @@ public static class SieveOfEratosthenes
         {
             if (isPrime[i])
             {
-                for (int j = i * i; j <= n; j += i)
+                for (int j = i * i; j > 0 && j <= n; j += i)
                 {
                     isPrime[j] = false;
                 }
@@ -112,10 +95,13 @@ public static class SieveOfEratosthenes
         {
             if (isPrime[i])
             {
-                for (int j = i * i; j <= n; j += i)
+                _ = Parallel.For(i * i, n + 1, j =>
                 {
-                    isPrime[j] = false;
-                }
+                    if (j % i == 0)
+                    {
+                        isPrime[j] = false;
+                    }
+                });
             }
         }
 
@@ -144,30 +130,33 @@ public static class SieveOfEratosthenes
             throw new ArgumentOutOfRangeException(nameof(n), "The upper limit must be greater than or equal to 2.");
         }
 
-        var isPrime = new bool[n + 1];
+        var isPrimee = new bool[n + 1];
         for (int i = 2; i <= n; i++)
         {
-            isPrime[i] = true;
+            isPrimee[i] = true;
         }
 
-        int limit = (int)Math.Sqrt(n);
-        for (int i = 2; i <= limit; i++)
+        int max = (int)Math.Sqrt(n);
+        for (int i = 2; i <= max; i++)
         {
-            if (isPrime[i])
+            if (isPrimee[i])
             {
-                for (int j = i * i; j <= n; j += i)
+                _ = Parallel.For(i * i, n + 1, j =>
                 {
-                    isPrime[j] = false;
-                }
+                    if (j % i == 0)
+                    {
+                        isPrimee[j] = false;
+                    }
+                });
             }
         }
 
         var primes = new List<int>();
-        for (int i = 2; i <= n; i++)
+        for (int j = 2; j <= n; j++)
         {
-            if (isPrime[i])
+            if (isPrimee[j])
             {
-                primes.Add(i);
+                primes.Add(j);
             }
         }
 
@@ -194,16 +183,35 @@ public static class SieveOfEratosthenes
         }
 
         int limit = (int)Math.Sqrt(n);
+        var smallPrimes = new List<int>();
         for (int i = 2; i <= limit; i++)
         {
             if (isPrime[i])
             {
-                for (int j = i * i; j <= n; j += i)
+                smallPrimes.Add(i);
+                for (int j = i * i; j <= limit; j += i)
                 {
                     isPrime[j] = false;
                 }
             }
         }
+
+        using var countdownEvent = new CountdownEvent(smallPrimes.Count);
+
+        foreach (var prime in smallPrimes)
+        {
+            _ = ThreadPool.QueueUserWorkItem(_ =>
+            {
+                for (int j = prime * prime; j <= n; j += prime)
+                {
+                    isPrime[j] = false;
+                }
+
+                _ = countdownEvent.Signal();
+            });
+        }
+
+        countdownEvent.Wait();
 
         var primes = new List<int>();
         for (int i = 2; i <= n; i++)
@@ -215,5 +223,23 @@ public static class SieveOfEratosthenes
         }
 
         return primes;
+    }
+
+    private static bool IsPrime(int number)
+    {
+        if (number < 2)
+        {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.Sqrt(number); i++)
+        {
+            if (number % i == 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
